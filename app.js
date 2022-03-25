@@ -69,6 +69,7 @@ passport.use("Student", new localStrategy(Student.authenticate()))
 passport.serializeUser(Student.serializeUser())
 passport.deserializeUser(Student.deserializeUser())
 
+var count;
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user
@@ -80,6 +81,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.render("home");
 })
+
 //College Auth Start
 app.get('/college/register', (req, res) => {
     res.render("college/register");
@@ -96,12 +98,15 @@ app.post('/college/register', async (req, res) => {
         res.send("not registeredddd")
     }
 })
+
 app.get('/college/login', (req, res) => {
     res.render("college/login");
 })
+
 app.post('/college/login', passport.authenticate('College', { failureFlash: true, failureRedirect: '/college/login' }), async (req, res) => {
     res.redirect("/lab")
 })
+
 app.get('/college/logout', (req, res) => {
     req.logOut();
     res.render("college/login");
@@ -112,6 +117,7 @@ app.get('/college/logout', (req, res) => {
 app.get('/student/register', (req, res) => {
     res.render("student/register");
 })
+
 app.post('/student/register', async (req, res) => {
     try {
         const { username, email, password } = req.body
@@ -123,32 +129,43 @@ app.post('/student/register', async (req, res) => {
         res.send("not registeredddd")
     }
 })
+
 app.get('/student/login', (req, res) => {
     res.render("student/login");
 })
+
 app.post('/student/login', passport.authenticate('Student', { failureFlash: true, failureRedirect: '/student/login' }), async (req, res) => {
     currentstudent = req.user;
     res.redirect("/student")
 })
+
 app.get('/student/dashboard', (req, res) => {
     res.render("student/show",{currentstudent});
 })
+
 app.get('/student/logout', (req, res) => {
     req.logOut();
     currentstudent = undefined
     res.render("student/login");
 })
 //Student Auth end
+
 app.get('/student', async (req, res) => {
     const labs = await Lab.find({}).populate("college")
     res.render("lab/index", { labs });
 })
+
 app.post('/book', async (req, res) => {
     const foundstudent = await student.findById(currentstudent._id)
     foundstudent.booking.push(req.body.id)
+    const bookedSlot=await Slot.findById(req.body.id)
+    bookedSlot.students.push(currentstudent._id)
+    await bookedSlot.save()
     await foundstudent.save()
+    console.log(bookedSlot);
     res.redirect("/student/bookings")
 })
+
 app.get('/student/bookings', async (req, res) => {
     const student = await Student.findById(currentstudent._id).populate("booking")
     console.log(req.user);
@@ -156,10 +173,23 @@ app.get('/student/bookings', async (req, res) => {
     console.log(student, bookings);
     res.render("booking", { bookings })
 })
+
 //Here only that college labs are got
 app.get('/lab', async (req, res) => {
     const labs = await Lab.find({ college: req.user._id }).populate("college");
-    res.render("lab/index", { labs })
+    // for(let lab of labs){
+    //     const id = lab._id;
+    //     const allowed = lab.capacity;
+    //     const slots = await Slot.find({ lab: id }).populate("lab");
+
+    //     // flag = false;
+    //     // for(let slot of slots){
+    //     //     const sid = slot._id;
+    //     //     const students = await Student.find({slot: sid}).populate("slot");
+    //     //     if(students.length >= capacity)
+    //     // }
+    // }
+    res.render("lab/index", { labs, count })
 })
 
 app.get('/lab/new', (req, res) => {
@@ -168,11 +198,12 @@ app.get('/lab/new', (req, res) => {
 
 app.post('/lab', upload.single('images'), async (req, res) => {
     const lab = new Lab(req.body.lab)
+    count = req.body.lab.capacity;
     const college = await College.findById(req.user._id)
     lab.college = college._id
     const today = new Date();
     let tempdate = new Date();
-    for (let i = today.getDay() + 1; i <= 6; i++) {
+    for (let i = today.getDay(); i <= 6; i++) {
         req.body.slots.map(async (e) => {
             const temp = new Slot(e);
             temp.start = e.start;
