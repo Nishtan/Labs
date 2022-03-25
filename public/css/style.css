@@ -1,98 +1,140 @@
-*{
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    font-family: 'Josefin Sans', sans-serif;
-    }
-    
-    header{
-     width: 100%;
-     height: 100vh;
-     background-image: url('../images/bg.png');
-     background-repeat: no-repeat;
-     background-size: 100% 100%;
-    
-    }
-    
-    .mainheader{
-     width: 100%;
-     height: 100px;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-    }
-    
-    .mainheader .logo img{
-     width: 250px; height: 70px;
-     padding-left: 60px;
-    }
-    
-    .mainheader nav{
-     width: 450px;
-     display: flex;
-     justify-content: space-around;
-     align-items: center;
-    }
-    
-    .mainheader nav a{
-     text-decoration: none;
-     color: black;
-     text-transform: uppercase;
-    }
-    
-    .menubtn{
-     margin-right: 60px;
-    }
-    .mainheader button{
-     padding: 10px 45px;
-     text-align: center;
-     font-size: 14px;
-     color: #fff;
-     border: none;
-     background-image: linear-gradient(to right,#649bff,#0070fa,#649bff);
-     border-radius: 10px;
-    }
-    
-    
-    main{
-     width: 100%;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-    }
-    
-    main .right-sec{
-     padding-right: 70px;
-    }
-    
-    main .left-sec{
-     padding-left: 100px;
-    }
-    
-    .left-sec h2{
-     font-size: 20px;
-     text-transform: capitalize;
-     font-weight: lighter;
-     color: #242424;
-     margin-top: 100px;
-    }
-    
-    .left-sec h1{
-     font-size: 55px;
-     text-transform: capitalize;
-     font-weight: 700;
-     margin: 15px 0;
-    }
-    
-    .left-sec p{
-     margin-bottom: 20px;
-    }
-    
-    .left-sec button{
-     padding: 15px 45px;
-     text-align: center;
-     font-size: 14px;
-     color: #fff;
-     border: none;
-     background-image: linear-gradient(to right,#649bff,#0070fa,#649bff);
-     border-radius: 10px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hero {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("https://lh3.googleusercontent.com/pc4rnm4rDhWT2a8bbTCqTmbVTd3DReW1PP1H5WgjxZg87uU8BAG1CfDsaoKS4QNuYYoZyvX9fJweBQZTz6JYjFnx-_m7ul4xPgMrSRtkV1TS89Fc1939xKz4Lx5agFBiEfGDDoR_9g=w2400");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo {
+  width: 100px;
+  cursor: pointer;
+}
+.navbar {
+  width: 85%;
+  height: 15%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  color: #fbfcfd;
+  padding: 10px 25px;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+  margin-left:5px;
+}
+.btn:hover{
+    background: #fbfcfd;
+    color: #000;
+}
+.content {
+  color: #fbfcfd;
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: 20px;
+}
+
+.labs {
+  font-size: 80px;
+  margin: 10px 0 30px;
+  line-height: 80px;
+}
+
+.side-bar {
+  width: 50px;
+  height: 100vh;
+  background: linear-gradient(#00545d, #000729);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+.social-links img{
+  width: 35px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+
+
+.social-links {
+  width: 50px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.bubbles {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: -70px;
+}
+.bubbles img {
+  width: 50px;
+  animation: bubble 7s linear infinite;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80vh);
+    opacity: 0;
+  }
+}
+
+.bubbles img:nth-child(1) {
+  animation-delay: 2s;
+  width: 25px;
+}
+.bubbles img:nth-child(2) {
+  animation-delay: 1s;
+}
+.bubbles img:nth-child(3) {
+  animation-delay: 3s;
+}
+.bubbles img:nth-child(4) {
+  animation-delay: 45s;
+}
+.bubbles img:nth-child(5) {
+  animation-delay: 3s;
+}
+.bubbles img:nth-child(6) {
+  width: 20px;
+  animation-delay: 6s;
+}
+.bubbles img:nth-child(7) {
+  animation-delay: 7s;
+  width: 35px;
+}
