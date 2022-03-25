@@ -15,4 +15,5 @@ const LabSchema = new Schema({
     department: String,
     capacity: Number
 })
+
 module.exports = mongoose.model("lab", LabSchema);
