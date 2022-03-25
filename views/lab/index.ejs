@@ -1,0 +1,8 @@
+<% layout('layouts/boilerplate')%>
+<h1>Available Labs</h1>
+
+<% for(let lab of labs) {%>
+<a href="/lab/<%= lab._id %> "><%= lab.name%> </a>
+<div>Lab Name : <%= lab.name%> </div>
+<div>Department : <%= lab.department%> </div>
+<% } %>  

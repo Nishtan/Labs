@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate')%>
+    <div>Lab Name : <%= lab.name%>
+    </div>
+    <div>Department : <%= lab.department%>
+    </div>
+    <div>Collegename : <%= college.collegename %>
+    </div>
+            <% for(slot of lab.slots){ %>
+                <form action="/book" method="post">
+                <input type="input" name="id" value="<%= slot._id %>" readonly>
+                <label for="<% slot._id %> ">
+                    <br>
+                    <div>
+                        <%= slot.date %>
+                    </div>
+                    <br>
+                    <div>
+                        <%= slot.start %>
+                    </div>
+                    <br>
+                    <div>
+                        <%= slot.end %>
+                    </div>
+                    <br>
+                </label>
+                <button>Submit</button>
+            </form>
+                <% } %>    

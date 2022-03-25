@@ -1,0 +1,11 @@
+<% layout('layouts/boilerplate')%>
+    <H1>Edit lab info.</H1>
+    <form action="/lab/<%= lab._id%>?_method=PUT" method="post" >
+        <label for="name"></label>
+        <input type="text" id="name" name="lab[name]" value="<%= lab.name %>">
+        <label for="department"></label>
+        <input type="text" id="department" name="lab[department]" value="<%= lab.department  %>">
+        <label for="capacity"></label>
+        <input type="text" id="capacity" name="lab[capacity]" value="<%= lab.capacity%>">
+        <button>Submit</button>
+</form>

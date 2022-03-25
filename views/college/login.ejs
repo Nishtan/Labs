@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="app">
+
+        <div class="bg"></div>
+        <form action="/college/login" method="post">
+        <header>
+            <img src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/reading_0re1.svg"">
+        </header>
+
+        <div class=" inputs">
+                <input type="text" id="name" name="username" placeholder="username or email">
+                <input type="password" id="password" name="password" placeholder="password">
+         </div>
+
+    </form>
+
+    <footer>
+        <button>Continue</button>
+        <p>Don't have an account? <a href="/college/register">Sign Up</a></p>
+    </footer>
+
+
+    </div>
+    </body>
+
+
+
+    <!-- <form action="/college/login" method="post">
+    <label for="name">Username</label>
+    <input type="text" id="name" name="username">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password">
+    <button>Submit</button>
+    </form>

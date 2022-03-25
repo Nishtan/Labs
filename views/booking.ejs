@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate')%>
+<ul>
+    <% for(booking of bookings) {%>
+    <li>
+        <div><%= booking.date %></div>
+        <div><%= booking.start %></div>
+        <div><%= booking.end %></div>
+    </li>
+        <% } %>  
+</ul>

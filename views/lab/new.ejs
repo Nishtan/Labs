@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate')%>
+    <form action="/lab" method="post" >
+        <label for="name"></label>
+        <input type="text" id="name" name="lab[name]">
+        <label for="department"></label>
+        <input type="text" id="department" name="lab[department]">
+        <label for="capacity"></label>
+        <input type="text" id="capacity" name="lab[capacity]">
+        <div id="Slot">
+            <button type='button' onclick="addSlot()" id="AddSlot">Add
+                Slot</button>
+            <div id="Slot1"></div>
+        </div>
+        <button>Submit</button>
+    </form>
+    <script src="/javascripts/dynamic.js"></script>
