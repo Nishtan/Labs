@@ -6,10 +6,17 @@ const studentSchema = new Schema({
         type: String,
         unique: true
     },
+    college: {
+        type: String,
+    },
+    bio: {
+        type: String,
+    },
     booking:[{
         type:Schema.Types.ObjectId,
         ref:"slot"
-    }]
+    }],
+
 })
 studentSchema.plugin(passportLocalMongoose)
 module.exports = mongoose.model("student", studentSchema);

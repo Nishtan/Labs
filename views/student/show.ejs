@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate')%>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/studentshow.css">
+
+    <div class="container">
+        <div class="row">
+                <div class="profile">
+                    <div class="profile-pic">
+                        <div class="header-color"></div>
+                        <div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAqAZG7zLGhZIxSUV6EVLfQX3WEUawmvM-eA&usqp=CAU"
+                                alt="Profile Picture">
+                        </div>
+                    </div>
+                    <div class="title">
+                        <h1>
+                            <%=currentstudent.username%>
+                        </h1>
+                        <h2><b>
+                                <%=currentstudent.email%>
+                            </b></h2>
+                        <br>
+                        <h2><span class="highlighted">Student at <%=currentstudent.college%></span></h2>
+                        <br>
+                        <h3><b>About Yourself</b></h3>
+                        <h3>
+                            <%=currentstudent.bio%>
+                        </h3>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>

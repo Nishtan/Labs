@@ -3,10 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-.hero {
+.hero1 {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   background-image: url("https://lh3.googleusercontent.com/pc4rnm4rDhWT2a8bbTCqTmbVTd3DReW1PP1H5WgjxZg87uU8BAG1CfDsaoKS4QNuYYoZyvX9fJweBQZTz6JYjFnx-_m7ul4xPgMrSRtkV1TS89Fc1939xKz4Lx5agFBiEfGDDoR_9g=w2400");
   background-size: cover;
   background-position: center;

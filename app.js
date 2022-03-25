@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") { require("dotenv").config() }
-let currentstudent=undefined
+let currentstudent = undefined
 const express = require("express");
 const app = express();
 const path = require('path');
@@ -16,6 +16,9 @@ const passport = require("passport")
 const localStrategy = require("passport-local")
 const methodOverride = require('method-override');
 const student = require("./models/student");
+const multer = require("multer")
+const { storage } = require("./cloudinary")
+const upload = multer({ storage })
 const secret = process.env.SECRET || "thisshouldbesecret"
 // const {isLoggedIn} = require('./middleware')
 
@@ -41,15 +44,6 @@ db.once("open", () => {
     console.log("Database connected")
 })
 
-const isLoggedIn = (req, res, next) => {
-    if(!req.isAuthenticated()) {
-        req.flash('error', 'You must be logged in');
-        console.log(currentstudent);
-        return res.redirect('/')
-    }
-    next();
-}
-
 const sessionConfig = {
     secret,
     resave: false,
@@ -63,11 +57,11 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 
-// app.use(passport.initialize())
-// app.use(passport.session())
-// passport.use("College", new localStrategy(College.authenticate()))
-// passport.serializeUser(College.serializeUser())
-// passport.deserializeUser(College.deserializeUser())
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use("College", new localStrategy(College.authenticate()))
+passport.serializeUser(College.serializeUser())
+passport.deserializeUser(College.deserializeUser())
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -95,7 +89,7 @@ app.post('/college/register', async (req, res) => {
         const { username, collegename, password } = req.body
         const college = new College({ username, collegename })
         const registeredCollege = await College.register(college, password)
-        
+
         res.send("registeredddd!!!")
     }
     catch (e) {
@@ -133,12 +127,15 @@ app.get('/student/login', (req, res) => {
     res.render("student/login");
 })
 app.post('/student/login', passport.authenticate('Student', { failureFlash: true, failureRedirect: '/student/login' }), async (req, res) => {
-    currentstudent=req.user;
+    currentstudent = req.user;
     res.redirect("/student")
+})
+app.get('/student/dashboard', (req, res) => {
+    res.render("student/show",{currentstudent});
 })
 app.get('/student/logout', (req, res) => {
     req.logOut();
-    currentstudent=undefined
+    currentstudent = undefined
     res.render("student/login");
 })
 //Student Auth end
@@ -147,18 +144,18 @@ app.get('/student', async (req, res) => {
     res.render("lab/index", { labs });
 })
 app.post('/book', async (req, res) => {
-    const foundstudent=await student.findById(currentstudent._id)
+    const foundstudent = await student.findById(currentstudent._id)
     foundstudent.booking.push(req.body.id)
     await foundstudent.save()
     res.redirect("/student/bookings")
- })
- app.get('/student/bookings', async (req, res) => {
-     const student=await Student.findById(currentstudent._id).populate("booking")
-     console.log(req.user);
-     const bookings=student.booking
-     console.log(student,bookings);
-     res.render("booking",{bookings})
- })
+})
+app.get('/student/bookings', async (req, res) => {
+    const student = await Student.findById(currentstudent._id).populate("booking")
+    console.log(req.user);
+    const bookings = student.booking
+    console.log(student, bookings);
+    res.render("booking", { bookings })
+})
 //Here only that college labs are got
 app.get('/lab', async (req, res) => {
     const labs = await Lab.find({ college: req.user._id }).populate("college");
@@ -169,8 +166,7 @@ app.get('/lab/new', (req, res) => {
     res.render("lab/new");
 })
 
-app.post('/lab', async (req, res) => {
-
+app.post('/lab', upload.single('images'), async (req, res) => {
     const lab = new Lab(req.body.lab)
     const college = await College.findById(req.user._id)
     lab.college = college._id
@@ -188,7 +184,7 @@ app.post('/lab', async (req, res) => {
         })
         tempdate = new Date(tempdate.getTime() + 1000 * 60 * 60 * 24)
     }
-    college.labs.push(lab._id)
+    lab.url = req.file.path
     await lab.save()
     await college.save()
     res.redirect("/lab")

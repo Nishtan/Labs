@@ -8,7 +8,7 @@
                     <div class="form-items">
                         <h3>Add New Lab</h3>
                         <p>Fill in the data below.</p>
-                        <form class="requires-validation" action="/lab" method="post">
+                        <form class="requires-validation" action="/lab" method="post" enctype="multipart/form-data">
                             
                             <div class="col-md-12">
                                 <input  class="form-control" type="text" id="name" name="lab[name]" placeholder="Lab Name" required>
@@ -25,13 +25,13 @@
 
 
                            <div class="form-control" id="Slot" class="col-md-12">
-                            <button type='button' onclick="addSlot()" id="AddSlot" style="color:white;">Add
+                            <button type='button' onclick="addSlot()" id="AddSlot" >Add
                                 Slot</button>
                             <div id="Slot1"></div>
                            </div>
 
                            <div class="col-md-12">
-                            <input class="form-control" type="image" id="image" name="lab[]" placeholder="" required>
+                           <input type="file" name="images" >
                                 </div>
 
 
