@@ -130,7 +130,7 @@ app.get('/student/logout', (req, res) => {
 })
 //Student Auth end
 app.get('/student', async (req, res) => {
-    const labs = await Lab.find({})
+    const labs = await Lab.find({}).populate("college")
     res.render("lab/index", { labs });
 })
 app.post('/book', async (req, res) => {
@@ -149,7 +149,6 @@ app.post('/book', async (req, res) => {
 //Here only that college labs are got
 app.get('/lab', async (req, res) => {
     const labs = await Lab.find({ college: req.user._id }).populate("college");
-    console.log(labs);
     res.render("lab/index", { labs })
 })
 
