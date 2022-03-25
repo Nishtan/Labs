@@ -7,9 +7,9 @@
 
 html,
 body {
+  background-image: url("https://img3.wallspic.com/crops/0/7/0/6/5/156070/156070-hexagon-honeycomb-azure-line-aqua-3840x2560.png");
   height: 100vh;
   display: grid;
-  background: #ede1e7;
   font-family: "Open Sans", sans-serif;
 }
 

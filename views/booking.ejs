@@ -1,10 +1,26 @@
 <% layout('layouts/boilerplate')%>
-<ul>
-    <% for(booking of bookings) {%>
-    <li>
-        <div><%= booking.date %></div>
-        <div><%= booking.start %></div>
-        <div><%= booking.end %></div>
-    </li>
-        <% } %>  
-</ul>
+<style>
+  body{
+  background-color: #152733;}
+</style>
+<table class="table mt-5 table-light">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Slot Id</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+      </tr>
+    </thead>
+    <tbody class="table-light">
+        <% for(booking of bookings) {%>
+      <tr>
+        <th scope="row"><%= booking._id %></th>
+        <td><%= booking.date %></td>
+        <td><%= booking.start  %></td>
+        <td><%= booking.end  %></td>
+      </tr>
+      <% } %>  
+    </tbody>
+  </table>
+  

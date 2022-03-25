@@ -92,7 +92,7 @@ app.post('/college/register', async (req, res) => {
         const college = new College({ username, collegename })
         const registeredCollege = await College.register(college, password)
 
-        res.send("registeredddd!!!")
+        res.redirect("/college/login")
     }
     catch (e) {
         res.send("not registeredddd")
@@ -120,10 +120,10 @@ app.get('/student/register', (req, res) => {
 
 app.post('/student/register', async (req, res) => {
     try {
-        const { username, email, password } = req.body
-        const student = new Student({ username, email })
+        const { username, email, password,college,bio  } = req.body
+        const student = new Student({ username, email,college,bio })
         const registeredStudent = await Student.register(student, password)
-        res.send("registeredddd!!!")
+        res.redirect("/student/login")
     }
     catch (e) {
         res.send("not registeredddd")
@@ -136,11 +136,11 @@ app.get('/student/login', (req, res) => {
 
 app.post('/student/login', passport.authenticate('Student', { failureFlash: true, failureRedirect: '/student/login' }), async (req, res) => {
     currentstudent = req.user;
-    res.redirect("/student")
+    res.redirect("/student/dashboard")
 })
 
 app.get('/student/dashboard', (req, res) => {
-    res.render("student/show",{currentstudent});
+    res.render("student/show", { currentstudent });
 })
 
 app.get('/student/logout', (req, res) => {
@@ -168,28 +168,14 @@ app.post('/book', async (req, res) => {
 
 app.get('/student/bookings', async (req, res) => {
     const student = await Student.findById(currentstudent._id).populate("booking")
-    console.log(req.user);
     const bookings = student.booking
-    console.log(student, bookings);
     res.render("booking", { bookings })
 })
 
 //Here only that college labs are got
 app.get('/lab', async (req, res) => {
     const labs = await Lab.find({ college: req.user._id }).populate("college");
-    // for(let lab of labs){
-    //     const id = lab._id;
-    //     const allowed = lab.capacity;
-    //     const slots = await Slot.find({ lab: id }).populate("lab");
-
-    //     // flag = false;
-    //     // for(let slot of slots){
-    //     //     const sid = slot._id;
-    //     //     const students = await Student.find({slot: sid}).populate("slot");
-    //     //     if(students.length >= capacity)
-    //     // }
-    // }
-    res.render("lab/index", { labs, count })
+    res.render("college/collegeshow", { labs })
 })
 
 app.get('/lab/new', (req, res) => {

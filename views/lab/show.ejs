@@ -1,32 +1,78 @@
 <% layout('layouts/boilerplate')%>
-    <div>Lab Name : <%= lab.name%>
-    </div>
-    <div>Department : <%= lab.department%>
-    </div>
-    <div>Collegename : <%= college.collegename %>
-    </div>
-    <% for(slot of lab.slots){ %>
-        <% const labcap=lab.capacity %>
-            <% const noofbooked=slot.students.length %>
-                <% if(noofbooked < labcap) {%>
-                    <form action="/book" method="post">
-                        <input type="input" name="id" value="<%= slot._id %>" readonly>
-                        <label for="<% slot._id %> ">
-                            <br>
-                            <div>
-                                <%= slot.date %>
-                            </div>
-                            <br>
-                            <div>
-                                <%= slot.start %>
-                            </div>
-                            <br>
-                            <div>
-                                <%= slot.end %>
-                            </div>
-                            <br>
-                        </label>
-                        <button>Submit</button>
-                    </form>
-                    <% } %>
-    <% } %>
+
+
+    <style>
+        table {
+
+            display: inline;
+        }
+
+        .new {
+            display: flexbox;
+            width: 50vw;
+        }
+
+        body {
+            background-image: url("https://img3.wallspic.com/crops/0/7/0/6/5/156070/156070-hexagon-honeycomb-azure-line-aqua-3840x2560.png");
+        }
+    </style>
+    <div class="container">
+        <div class="row flex ">
+            <div class="col-4 card text-white bg-info mb-3 mt-7 ml-16 new p-0" style="max-width: 18rem;">
+
+                <img class="card-img-top" src="<%=lab.url%>" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text text-center h4">
+                        <%= lab.name.toUpperCase() %> LAB
+                    </p>
+                    <p class="card-text text-center h4">College Name: <%= college.collegename %>
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-8 ml-20">
+                <p>
+                <table class="table mt-5 float-right">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Slot Id</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">End</th>
+                            <th scope="col">Submit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-light">
+                        <% for(slot of lab.slots){ %>
+                            <% const labcap=lab.capacity %>
+                                <% const noofbooked=slot.students.length %>
+                                    <% if(noofbooked < labcap) {%>
+                                        <form action="/book" method="post">
+
+
+                                            <tr>
+                                                <th scope="row"><input type="input" name="id" value="<%= slot._id %>"
+                                                        readonly></th>
+                                                <td>
+                                                    <%= slot.date %>
+                                                </td>
+                                                <td>
+                                                    <%= slot.start %>
+                                                </td>
+                                                <td>
+                                                    <%= slot.end %>
+                                                </td>
+
+
+
+                                                <td><button class="btn btn-outline-info">Submit</button></td>
+                                            </tr>
+
+                                        </form>
+                                        <% } %>
+                                            <% } %>
+                    </tbody>
+                </table>
+                </p>
+            </div>
+        </div>

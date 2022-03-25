@@ -1,9 +1,15 @@
-<% layout('layouts/boilerplate')%>
 <style>
     body{
             background-image: url("https://img3.wallspic.com/crops/0/7/0/6/5/156070/156070-hexagon-honeycomb-azure-line-aqua-3840x2560.png");
         }
 </style>
+<script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/input.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<div class="flex justify-content-center mt-7">
+    <a class="btn btn-primary btn-lg mr-4"href="/lab/new"> New Lab</a>
+    <a class="btn btn-danger btn-lg"href="/college/logout">Logout</a>
+</div>
 <% for(let lab of labs) {%>
 <div class=" row bg-gray-500 shadow-md m-16 rounded rounded-xl px-0 space-y-12 " style="opacity: 0.8;">
     <div class="col-6" style="padding-left: 0px;padding-right: 0px;">
@@ -17,13 +23,8 @@
     <p class="text-gray-900 md:text-2xl h3"><%= lab.college.collegename%></p>
     <br>
     <br>
-    <a style="text-decoration: none;" class="rounded bg-blue-400 text-white text-lg py-3 px-3 mt-4" href="/lab/<%= lab._id %> ">
+    <a style="text-decoration: none;" class="rounded bg-blue-500 text-white text-lg py-3 px-3 mt-4" href="/lab/<%= lab._id %> ">
         Check Available Slots</a>
     </div>
 </div>
 <% } %>  
-  
-
-
-
-
