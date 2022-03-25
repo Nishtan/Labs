@@ -17,6 +17,9 @@ const localStrategy = require("passport-local")
 const methodOverride = require('method-override');
 const student = require("./models/student");
 const secret = process.env.SECRET || "thisshouldbesecret"
+// const {isLoggedIn} = require('./middleware')
+
+
 app.engine('ejs', ejsMate)
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -37,6 +40,16 @@ db.on("error", console.error.bind('console', "connection error:"))
 db.once("open", () => {
     console.log("Database connected")
 })
+
+const isLoggedIn = (req, res, next) => {
+    if(!req.isAuthenticated()) {
+        req.flash('error', 'You must be logged in');
+        console.log(currentstudent);
+        return res.redirect('/')
+    }
+    next();
+}
+
 const sessionConfig = {
     secret,
     resave: false,
@@ -50,11 +63,11 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 
-app.use(passport.initialize())
-app.use(passport.session())
-passport.use("College", new localStrategy(College.authenticate()))
-passport.serializeUser(College.serializeUser())
-passport.deserializeUser(College.deserializeUser())
+// app.use(passport.initialize())
+// app.use(passport.session())
+// passport.use("College", new localStrategy(College.authenticate()))
+// passport.serializeUser(College.serializeUser())
+// passport.deserializeUser(College.deserializeUser())
 
 app.use(passport.initialize())
 app.use(passport.session())
