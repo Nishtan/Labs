@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/css/button.css">
 <style>
     body{
             background-image: url("https://img3.wallspic.com/crops/0/7/0/6/5/156070/156070-hexagon-honeycomb-azure-line-aqua-3840x2560.png");
@@ -17,13 +18,8 @@
     <p class="text-gray-900 md:text-2xl h3"><%= lab.college.collegename%></p>
     <br>
     <br>
-    <a style="text-decoration: none;" class="rounded bg-blue-400 text-white text-lg py-3 px-3 mt-4" href="/lab/<%= lab._id %> ">
+    <a style="text-decoration: none;" class="rounded bg-blue-400 text-white text-lg py-3 px-3 mt-4 glow-on-hover btn-outline-dark" href="/lab/<%= lab._id %> ">
         Check Available Slots</a>
     </div>
 </div>
 <% } %>  
-  
-
-
-
-
