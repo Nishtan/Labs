@@ -93,8 +93,5 @@ nodemon app.js
 ## Screenshots
 <!-- Add a few screenshots for parts of the project completed till now to give the viewer a quick idea of what your project looks like. After all, a picture speaks a thousand words. -->
 
-![Screenshot alt text](https://img.freepik.com/free-photo/blue-purple-technology-circuit_73426-205.jpg "Here is a screenshot")
+Google Drive Link: https://drive.google.com/drive/folders/1jUtyHCBGbZbUOHTi9bX9sVYxDRB8vvKh?usp=sharing
 
-<!-- ## Recording
-
-[Website Demo](https://drive.google.com/drive/folders/1Wh47xX10LzDLpRedsaqX1sScADr4RQXq) -->
