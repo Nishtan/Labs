@@ -87,6 +87,7 @@ nodemon app.js
 ## Future scope
 >The project can be further improved and built upon the following features in the future :
 - A feedback service for both students as well as colleges(which provide various labs) can be implemented.This will provide proper boost to the shared labs/workshops process, thus enhancing the reach of quality education.
+- A feature which can filter labs according to the pincodes of the respective districts.
 - Information regarding various research projects,internships and workshops can be conveyed to students so that they can get to work under best of professors in India.
 - Payment gateway can be implemented for security deposit or lab charges(to avail the facilities of the lab).Also, some colleges can wilingly provide monetary benefits to students by giving free access of labs/workshops.
 
