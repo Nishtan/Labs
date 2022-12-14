@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Paytm-Nodejs</title>
+  </head>
+  <body>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-image: url("https://img3.wallspic.com/crops/0/7/0/6/5/156070/156070-hexagon-honeycomb-azure-line-aqua-3840x2560.png");
+  height: 100vh;
+  display: grid;
+  font-family: "Open Sans", sans-serif;
+}
+    </style>
+
+    <div class="row mt-4">
+      <div class="col-md-4 offset-md-4">
+        <div class="card" style="background-color: rgb(19, 23, 86);">
+          <div class="card-body">
+            <form class="" action="/paynow" method="post">
+              <div class="form-group">
+                <label for="" style="color: white;">Name: </label>
+                <input class="form-control" type="text" name="name" value="" required>
+              </div>
+              <div class="form-group">
+                <label for="" style="color: white;">Email: </label>
+                <input class="form-control" type="text" name="email" value="" required>
+              </div>
+              <div class="form-group">
+                <label for="" style="color: white;">Phone: </label>
+                <input class="form-control" type="text" name="phone" value="" required>
+              </div>
+                <div class="form-group">
+                <label for="" style="color: white;">Amount: </label>
+                <input class="form-control" type="text" name="amount" value="" required>
+              </div>
+              <div class="form-group col-4 offset-4 mt-4">
+                <button class="btn form-control btn-primary">Pay Now</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
