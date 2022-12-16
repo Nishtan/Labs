@@ -24,6 +24,7 @@ const checksum_lib = require("./paytm/checksum");
 const config = require("./paytm/config");
 const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
+const MongoStore = require("connect-mongo");
 // const {isLoggedIn} = require('./middleware')
 
 
@@ -35,7 +36,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, "public")))
 app.use(methodOverride("_method"))
 app.use(flash())
-const dbUrl = 'mongodb://localhost:27017/lab'
+const dbUrl = process.env.DB_URL
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -47,8 +48,21 @@ db.on("error", console.error.bind('console', "connection error:"))
 db.once("open", () => {
     console.log("Database connected")
 })
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret
+    }
+});
+
+store.on("error",function(e)
+{console.log("SESSION ERROR",e);
+})
 
 const sessionConfig = {
+    store,
+    name:"session",
     secret,
     resave: false,
     saveUninitialized: true,
@@ -170,9 +184,9 @@ app.post('/book', async (req, res) => {
     foundstudent.booking.push(req.body.id)
     const bookedSlot = await Slot.findById(req.body.id)
     bookedSlot.students.push(currentstudent._id)
-    // await bookedSlot.save()
-    // await foundstudent.save()
-    res.redirect("/gateway")
+    await bookedSlot.save();
+    await foundstudent.save();
+    res.redirect("/gateway");
 })
 app.post("/paynow", [parseUrl, parseJson], (req, res) => {
     // Route for making payment
