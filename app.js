@@ -24,7 +24,7 @@ const checksum_lib = require("./paytm/checksum");
 const config = require("./paytm/config");
 const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
-const MongoStore = require("connect-mongo");
+
 // const {isLoggedIn} = require('./middleware')
 
 
@@ -48,20 +48,8 @@ db.on("error", console.error.bind('console', "connection error:"))
 db.once("open", () => {
     console.log("Database connected")
 })
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    touchAfter: 24 * 60 * 60,
-    crypto: {
-        secret
-    }
-});
-
-store.on("error",function(e)
-{console.log("SESSION ERROR",e);
-})
 
 const sessionConfig = {
-    store,
     name:"session",
     secret,
     resave: false,
