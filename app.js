@@ -37,20 +37,28 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(methodOverride("_method"))
 app.use(flash())
 const dbUrl = process.env.DB_URL
+const dbConnection = async () => {
+    await mongoose.connect(dbUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
 
-mongoose.connect(dbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+     db = mongoose.connection;
+    db.on("error", console.error.bind('console', "connection error:"))
+    db.once("open", () => {
+        console.log("Database connected")
+    });
+}
+var db;
+dbConnection();
 
-const db = mongoose.connection;
-db.on("error", console.error.bind('console', "connection error:"))
-db.once("open", () => {
-    console.log("Database connected")
-})
+// db.on("error", console.error.bind('console', "connection error:"))
+// db.once("open", () => {
+//     console.log("Database connected")
+// });
 
 const sessionConfig = {
-    name:"session",
+    name: "session",
     secret,
     resave: false,
     saveUninitialized: true,
@@ -89,7 +97,7 @@ app.get('/', (req, res) => {
 })
 app.get('/student/research', (req, res) => {
     res.render("college/research");
-    
+
 })
 //College Auth Start
 app.get('/college/register', (req, res) => {
@@ -165,7 +173,7 @@ app.get('/student', async (req, res) => {
 })
 
 app.get('/gateway', async (req, res) => {
-    res.render("payment",{currentstudent});
+    res.render("payment", { currentstudent });
 })
 app.post('/book', async (req, res) => {
     const foundstudent = await student.findById(currentstudent._id)
