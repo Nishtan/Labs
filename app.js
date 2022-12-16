@@ -356,6 +356,6 @@ app.put("/lab/:id", async (req, res) => {
     res.redirect(`/lab/${lab._id}`);
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Listening on port 3000");
 })
